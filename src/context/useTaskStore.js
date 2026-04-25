@@ -2,15 +2,16 @@ import { create } from 'zustand';
 import { persist } from 'zustand/middleware';
 
 const initialColumns = [
-  { id: 'todo', title: 'To Do' },
-  { id: 'in-progress', title: 'In Progress' },
-  { id: 'done', title: 'Done' }
+  { id: 'applied', title: 'Applied' },
+  { id: 'interviewing', title: 'Interviewing' },
+  { id: 'offer', title: 'Offer' },
+  { id: 'rejected', title: 'Rejected' }
 ];
 
 const mockTasks = [
-  { id: 't1', title: 'Research competitors', description: 'Analyze top 3 competitors in the market.', priority: 'High', columnId: 'todo' },
-  { id: 't2', title: 'Setup project repo', description: 'Initialize React, Vite, and Tailwind.', priority: 'Medium', columnId: 'in-progress' },
-  { id: 't3', title: 'Write design specs', description: 'Finalize Figma designs for the dashboard.', priority: 'Low', columnId: 'done' },
+  { id: 'j1', title: 'Senior Frontend Engineer', company: 'TechCorp', salary: '$120k - $150k', url: 'https://techcorp.com/careers', priority: 'High', columnId: 'applied' },
+  { id: 'j2', title: 'React Developer', company: 'StartupX', salary: '$110k', url: 'https://startupx.io/jobs', priority: 'Medium', columnId: 'interviewing' },
+  { id: 'j3', title: 'UI/UX Engineer', company: 'DesignStudio', salary: '$130k', url: '', priority: 'Low', columnId: 'rejected' },
 ];
 
 export const useTaskStore = create(

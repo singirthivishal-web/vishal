@@ -14,6 +14,9 @@ const TaskForm = () => {
 
   const [formData, setFormData] = useState({
     title: '',
+    company: '',
+    salary: '',
+    url: '',
     description: '',
     priority: 'Low',
     columnId: defaultColumn
@@ -25,6 +28,9 @@ const TaskForm = () => {
       if (taskToEdit) {
         setFormData({
           title: taskToEdit.title,
+          company: taskToEdit.company || '',
+          salary: taskToEdit.salary || '',
+          url: taskToEdit.url || '',
           description: taskToEdit.description || '',
           priority: taskToEdit.priority || 'Low',
           columnId: taskToEdit.columnId
@@ -56,16 +62,50 @@ const TaskForm = () => {
         </div>
 
         <form onSubmit={handleSubmit} className="p-6 space-y-4">
-          <div>
-            <label className="block text-sm font-medium text-textMuted mb-1">Title</label>
-            <input 
-              autoFocus
-              required
-              className="w-full bg-background border border-secondary/30 rounded-lg px-4 py-2.5 text-textMain focus:ring-2 focus:ring-primary focus:border-transparent outline-none transition-all placeholder-secondary" 
-              placeholder="e.g. Map out project wireframes"
-              value={formData.title}
-              onChange={(e) => setFormData({ ...formData, title: e.target.value })}
-            />
+          <div className="grid grid-cols-2 gap-4">
+            <div>
+              <label className="block text-sm font-medium text-textMuted mb-1">Job Role / Title</label>
+              <input 
+                autoFocus
+                required
+                className="w-full bg-background border border-secondary/30 rounded-lg px-4 py-2.5 text-textMain focus:ring-2 focus:ring-primary focus:border-transparent outline-none transition-all placeholder-secondary" 
+                placeholder="e.g. Senior Frontend Engineer"
+                value={formData.title}
+                onChange={(e) => setFormData({ ...formData, title: e.target.value })}
+              />
+            </div>
+            <div>
+              <label className="block text-sm font-medium text-textMuted mb-1">Company Name</label>
+              <input 
+                required
+                className="w-full bg-background border border-secondary/30 rounded-lg px-4 py-2.5 text-textMain focus:ring-2 focus:ring-primary focus:border-transparent outline-none transition-all placeholder-secondary" 
+                placeholder="e.g. TechCorp Inc."
+                value={formData.company}
+                onChange={(e) => setFormData({ ...formData, company: e.target.value })}
+              />
+            </div>
+          </div>
+
+          <div className="grid grid-cols-2 gap-4">
+            <div>
+              <label className="block text-sm font-medium text-textMuted mb-1">Salary Range</label>
+              <input 
+                className="w-full bg-background border border-secondary/30 rounded-lg px-4 py-2.5 text-textMain focus:ring-2 focus:ring-primary focus:border-transparent outline-none transition-all placeholder-secondary" 
+                placeholder="e.g. $120k - $150k"
+                value={formData.salary}
+                onChange={(e) => setFormData({ ...formData, salary: e.target.value })}
+              />
+            </div>
+            <div>
+              <label className="block text-sm font-medium text-textMuted mb-1">Job Post URL</label>
+              <input 
+                type="url"
+                className="w-full bg-background border border-secondary/30 rounded-lg px-4 py-2.5 text-textMain focus:ring-2 focus:ring-primary focus:border-transparent outline-none transition-all placeholder-secondary" 
+                placeholder="https://..."
+                value={formData.url}
+                onChange={(e) => setFormData({ ...formData, url: e.target.value })}
+              />
+            </div>
           </div>
 
           <div>

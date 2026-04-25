@@ -8,10 +8,23 @@ const userSchema = new mongoose.Schema({
   },
   email: {
     type: String,
-    required: true,
     unique: true,
+    sparse: true,
     trim: true,
     lowercase: true
+  },
+  googleId: {
+    type: String,
+    unique: true,
+    sparse: true
+  },
+  linkedinId: {
+    type: String,
+    unique: true,
+    sparse: true
+  },
+  avatar: {
+    type: String
   },
   targetRole: {
     type: String,

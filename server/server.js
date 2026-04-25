@@ -2,6 +2,7 @@ import express from 'express';
 import cors from 'cors';
 import dotenv from 'dotenv';
 import mongoose from 'mongoose';
+import passport from 'passport';
 
 dotenv.config();
 
@@ -20,6 +21,9 @@ app.use(cors({
 }));
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
+
+// ── Passport Initialization ───────────────────────────────────────────────
+app.use(passport.initialize());
 
 // ── MongoDB Atlas ─────────────────────────────────────────────────────────
 const mongooseOptions = {
@@ -44,7 +48,9 @@ app.get('/api/health', (_req, res) => res.json({ status: 'ok', message: 'CareerO
 import userRoutes     from './routes/users.js';
 import resumeRoutes   from './routes/resumes.js';
 import analysisRoutes from './routes/analysis.js';
+import authRoutes     from './routes/auth.js';
 
+app.use('/api/auth',     authRoutes);
 app.use('/api/users',    userRoutes);
 app.use('/api/resumes',  resumeRoutes);
 app.use('/api/analysis', analysisRoutes);

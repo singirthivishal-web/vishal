@@ -2,7 +2,7 @@ import React from 'react';
 import { useSortable } from '@dnd-kit/sortable';
 import { CSS } from '@dnd-kit/utilities';
 import { cn } from '../lib/utils';
-import { GripVertical, MoreHorizontal, Eye } from 'lucide-react';
+import { GripVertical, Eye, Building2, DollarSign, ExternalLink } from 'lucide-react';
 import { useNavigate } from 'react-router-dom';
 
 const TaskCard = ({ task }) => {
@@ -57,20 +57,50 @@ const TaskCard = ({ task }) => {
         </div>
       </div>
       
-      <h4 className="font-semibold text-textMain mb-1 line-clamp-2">{task.title}</h4>
-      {task.description && (
-        <p className="text-sm text-textMuted line-clamp-2 mb-3">{task.description}</p>
-      )}
-      
-      {/* Action overlay */}
-      <div className="opacity-0 group-hover:opacity-100 transition-opacity absolute bottom-3 right-3 flex gap-2">
-         <button 
-           onClick={(e) => { e.stopPropagation(); navigate(`/dashboard/task/${task.id}`); }}
-           className="bg-surface p-1.5 rounded-md text-textMain hover:bg-primary hover:text-white transition-colors shadow-sm"
-           title="View Details"
-         >
-           <Eye className="w-3.5 h-3.5" />
-         </button>
+      <h4 className="font-semibold text-textMain mb-2 line-clamp-2 pr-6">{task.title}</h4>
+
+      {/* Company & Salary */}
+      <div className="space-y-1 mb-3">
+        {task.company && (
+          <div className="flex items-center gap-1.5 text-xs text-textMuted">
+            <Building2 className="w-3.5 h-3.5 flex-shrink-0" />
+            <span className="truncate font-medium text-textMain/80">{task.company}</span>
+          </div>
+        )}
+        {task.salary && (
+          <div className="flex items-center gap-1.5 text-xs text-textMuted">
+            <DollarSign className="w-3.5 h-3.5 flex-shrink-0" />
+            <span>{task.salary}</span>
+          </div>
+        )}
+      </div>
+
+      {/* Footer row */}
+      <div className="flex items-center justify-between pt-2 border-t border-secondary/10">
+        {task.url ? (
+          <a
+            href={task.url}
+            target="_blank"
+            rel="noopener noreferrer"
+            onClick={(e) => e.stopPropagation()}
+            className="flex items-center gap-1 text-xs text-primary hover:underline"
+          >
+            <ExternalLink className="w-3 h-3" />
+            Job Post
+          </a>
+        ) : (
+          <span />
+        )}
+
+        {/* View Details */}
+        <button 
+          onClick={(e) => { e.stopPropagation(); navigate(`/dashboard/task/${task.id}`); }}
+          className="flex items-center gap-1 text-xs text-textMuted hover:text-primary transition-colors"
+          title="View Details"
+        >
+          <Eye className="w-3 h-3" />
+          Details
+        </button>
       </div>
     </div>
   );
